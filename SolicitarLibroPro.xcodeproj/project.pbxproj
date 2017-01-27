@@ -22,6 +22,7 @@
 		F83BA3B31DEF748A0030FD79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F83BA3B61DEF748A0030FD79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F83BA3B81DEF748A0030FD79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F8CEAE1E1E3AFB0E007531C0 /* SolicitarLibroPro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SolicitarLibroPro.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +55,7 @@
 		F83BA3AB1DEF748A0030FD79 /* SolicitarLibroPro */ = {
 			isa = PBXGroup;
 			children = (
+				F8CEAE1E1E3AFB0E007531C0 /* SolicitarLibroPro.entitlements */,
 				F83BA3AC1DEF748A0030FD79 /* AppDelegate.swift */,
 				F83BA3AE1DEF748A0030FD79 /* ViewController.swift */,
 				F83BA3B01DEF748A0030FD79 /* Main.storyboard */,
@@ -91,13 +93,18 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "César Omar Román Domínguez";
 				TargetAttributes = {
 					F83BA3A81DEF748A0030FD79 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = 2GA4786XP3;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.DataProtection = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -182,6 +189,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -232,6 +240,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -302,6 +311,7 @@
 				F83BA3BD1DEF748A0030FD79 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

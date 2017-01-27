@@ -13,7 +13,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var editarTexto: UITextField!
     @IBOutlet weak var labelTitulo: UILabel!
     @IBOutlet weak var labelAutores: UILabel!
-    @IBOutlet weak var labelPortada: UILabel!
+    @IBOutlet weak var ImagenPortada: UIImageView!
+  
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,49 +32,58 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         self.view.endEditing(true)
         
-      
-        
         let urls = "https://openlibrary.org/api/books?jscmd=data&format=json&bibkeys=ISBN:" + editarTexto.text!
         let url = URL(string: urls)
-        let datos = try! Data(contentsOf: url!)
+        let datos = NSData(contentsOf: url! as URL)
         
         if datos != nil {
             
-            let json = try! JSONSerialization.jsonObject(with: datos)
-            let dico1 = json as! NSDictionary
-            
-            let dico2 = dico1["ISBN:978-84-376-0494-7"] as! NSDictionary
-            
-            let dico3 = dico2["title"] as! NSString
-            
-            labelTitulo.text = String(dico3)
-            
-            print(dico2)
-            
-
-       
-            
-            //self.ciudad.text = String(describing: dico6)
-            
-            /*
-            
-            
-            
-            let dico5 = dico4["name"] as! NSString
-            //self.ciudad.text = String(describing: dico6)
-            
-           
-            labelAutores.text = String(dico5)
-            */
-            
-
+            do {
+                let json = try JSONSerialization.jsonObject(with: datos! as Data, options: JSONSerialization.ReadingOptions.mutableLeaves)
+                let jsonDic = json as! NSDictionary
+                
+                if jsonDic.allKeys.count == 0 {
+                    
+                    
+                } else {
+                    var titleString = ""
+                    var authorsString = ""
+                    
+                    let book = jsonDic["ISBN:\(editarTexto.text!)"] as! NSDictionary
+                    
+                    if book["title"] != nil {
+                        titleString = book["title"] as! NSString as String
+                    }
+                    
+                    if book["authors"] != nil {
+                        let authorsArray = book["authors"] as! NSArray
+                        for i in 0 ..< authorsArray.count {
+                            let a = authorsArray[i] as! NSDictionary
+                            if i == 0 {
+                                authorsString = a["name"] as! NSString as String
+                            } else {
+                                authorsString = authorsString + ", " + (a["name"] as! NSString as String)
+                            }
+                        }
+                    }
+                    
+                    labelTitulo.text = titleString
+                    labelAutores.text = authorsString
+                    
+                    
+                    let url = URL(string: "http://covers.openlibrary.org/b/isbn/\(editarTexto.text!)-M.jpg")
+                    let data = try? Data(contentsOf: url!)
+                    ImagenPortada.image = UIImage(data: data!)
+                    
+                    
+                    
+                }
+            } catch _ {
+                
+            }
         } else {
-            let alertController = UIAlertController(title: "Error", message: "Ha habido un problema conectando con el servidor", preferredStyle: UIAlertControllerStyle.alert)
-            alertController.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.default,handler: nil))
-            
-            self.present(alertController, animated: true, completion: nil)
+           
         }
-        
         return false
     }
     
